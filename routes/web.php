@@ -18,6 +18,15 @@ Route::post('create','App\Http\Controllers\CodeController@create')->name('create
 Route::post('get_updatecodes','App\Http\Controllers\CodeController@getupcode')->name('getup.codedata');
 Route::post('update_codedata','App\Http\Controllers\CodeController@update')->name('update.codedata');
 Route::post('delete_code','App\Http\Controllers\CodeController@delete')->name('delete.codedata');
+//updated 8/2
+Route::post('view','App\Http\Controllers\CodeController@view')->name('view');
+
+Route::post('showeditdata','App\Http\Controllers\LinksController@showeditdata')->name('showeditdata');
+
+Route::get('dashboard',function (){
+   return view('check');
+});
+//
 
 #---------------------------------------------------------------------------------------------------------------------------
 Route::get('create_links','App\Http\Controllers\LinksController@show')->name('createpdf.show');
