@@ -97,6 +97,7 @@ class LinksController extends Controller
                 'status' => true,
                 'message' => "deleted"
             ]);
+            
         }
         else{
             return response()->json([
@@ -122,6 +123,14 @@ class LinksController extends Controller
             return response()->json(['status'=>false,'code'=>$codes]);
         }
 
+
+    }
+
+    public function showeditdata(Request $request   )
+    { 
+        $product_id=$request->id;
+        $data=HowItWork::find($product_id);
+        return response()->json(['product'=>$data]);
 
     }
 }

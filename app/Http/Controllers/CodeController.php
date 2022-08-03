@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Code;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -86,4 +87,15 @@ class CodeController extends Controller
             ]);
         }
     }
+    public function view(Request $request)
+    {
+        $codes=$request->code;
+        $data= DB::table('codes')->get()->last()->code;
+        if ($data==$codes) {
+            return response()->json(['status'=>true]);
+        }else{
+            return response()->json(['status'=>false]);
+        }
+
+        }
 }
