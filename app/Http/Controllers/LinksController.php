@@ -21,7 +21,6 @@ class LinksController extends Controller
             return DataTables::of($data)
                 ->addColumn('actions', function($data){
                     return '<div class="btn-group">
-
                                                 <button class="btn btn-sm btn-primary" data-id="'.$data->id.'" id="editt">Update</button>
                                                 <button class="btn btn-sm btn-danger" data-id="'.$data->id.'" id="delete1">Delete</button>
                                           </div>';
@@ -35,11 +34,22 @@ class LinksController extends Controller
 
         public function create(Request $request)
         {
-
-            $data=$request->validate([
-                'title'=>'required',
-                'link'
+            $validator=\Illuminate\Support\Facades\Validator::make($request->all(),[
+                'title'=>'required|string|min:3|max:20',
+                'file'=>'required'
             ]);
+            if ($validator->fails())
+            {
+                $errors = [];
+                foreach ($validator->errors()->getMessages() as $message) {
+                    $error = implode($message);
+                    $errors[] = $error;
+                }
+                return response()->json([
+                    "message"=>implode(' , ', $errors),
+                    "status"=>false
+                ]);
+            }
             $data['title']=$request->title;
             $file = $request->file('file');
             $filename = time().''.$file->getClientOriginalName();
@@ -80,6 +90,21 @@ class LinksController extends Controller
     }
 
     public function update(Request $request){
+        $validator=\Illuminate\Support\Facades\Validator::make($request->all(),[
+            'title'=>'required|string|min:3|max:20',
+        ]);
+        if ($validator->fails())
+        {
+            $errors = [];
+            foreach ($validator->errors()->getMessages() as $message) {
+                $error = implode($message);
+                $errors[] = $error;
+            }
+            return response()->json([
+                "message"=>implode(' , ', $errors),
+                "status"=>false
+            ]);
+        }
         $file_id=$request->fid;
         HowItWork::where('id',$file_id)->update([
             'title'=>$request->title
@@ -105,23 +130,5 @@ class LinksController extends Controller
             ]);
         }
     }
-    public function view(Request $request)
-    {
-        $codes=$request->code;
 
-
-
-        $data= DB::table('codes')->get()->last()->code;
-        if ($data==$codes) {
-
-            return response()->json(['status'=>true,'code'=>$codes]);
-
-
-
-        }else{
-            return response()->json(['status'=>false,'code'=>$codes]);
-        }
-
-
-    }
 }

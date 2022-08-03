@@ -14,7 +14,6 @@
                     <div class="form-group">
                         <label for="">Title</label>
                         <input type="text" class="form-control" name="title" placeholder="Enter New Title">
-                        <span class="text-danger error-text title_error"></span><input type="text" class="form-control" name="title" placeholder="Enter New Title">
                         <span class="text-danger error-text title_error"></span>
                     </div>
                     <div class="form-group">

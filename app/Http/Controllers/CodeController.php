@@ -30,10 +30,25 @@ class CodeController extends Controller
     }
     public function create(Request $request)
     {
-        $dress =Code::create([
+        $validator=\Illuminate\Support\Facades\Validator::make($request->all(),[
+            'code'=>'required|string|min:3|max:10',
+        ]);
+        if ($validator->fails())
+        {
+            $errors = [];
+            foreach ($validator->errors()->getMessages() as $message) {
+                $error = implode($message);
+                $errors[] = $error;
+            }
+            return response()->json([
+                "message"=>implode(' , ', $errors),
+                "status"=>false
+            ]);
+        }
+        $code =Code::create([
             'code'=>$request->code,
         ]);
-        if ($dress){
+        if ($code){
 
             return response()->json(
                 [
@@ -61,6 +76,21 @@ class CodeController extends Controller
         ]);
     }
     public function update(Request $request){
+        $validator=\Illuminate\Support\Facades\Validator::make($request->all(),[
+            'code'=>'required|string|min:3|max:10',
+        ]);
+        if ($validator->fails())
+        {
+            $errors = [];
+            foreach ($validator->errors()->getMessages() as $message) {
+                $error = implode($message);
+                $errors[] = $error;
+            }
+            return response()->json([
+                "message"=>implode(' , ', $errors),
+                "status"=>false
+            ]);
+        }
         $code_id=$request->cid;
         Code::where('id',$code_id)->update([
             'code'=>$request->code
