@@ -7,7 +7,9 @@
     </head>
 <body>
     <button class="btn btn-sm btn-primary"   id="editP">Update</button>
-
+<form action="{{url('create_code')}}" method="get">
+    <button class="btn btn-sm btn-primary"   id="addcode">addcode</button>
+</form>
 <div class="modal fade editProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
