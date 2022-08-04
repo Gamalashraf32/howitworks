@@ -1,12 +1,10 @@
-  
 <!DOCTYPE html>
 <html>
 <head>
     <title>datatable</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
-     
-</head>
+    </head>
 <body>
     <button class="btn btn-sm btn-primary"   id="editP">Update</button>
 
@@ -28,7 +26,7 @@
                         <span class="text-danger error-text product_name_error"></span>
                         <div class="alert alert-danger" id="failed_msg" style="display: none;">
                             make sure you have changed the content
-                         </div>
+                    </div>
                         <label for="">code</label>
                         <input type="text" class="form-control" name="code" placeholder="Enter product name">
                         <span class="text-danger error-text product_name_error"></span>
@@ -66,9 +64,7 @@
                             make sure you have changed the content
                             </div>
                             
-                          
-                           
-                       @include('howitworkspdf')
+                                    @include('howitworkspdf')
                         </div>
                         <div class="form-group">
                         <button type="submit" class="btn btn-block btn-success">Save Changes</button>
@@ -80,28 +76,28 @@
     </div>
 </div>
 </form><script type="text/javascript">
- $.ajaxSetup({
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         
         $(function(){
-           
+            
 });
 
 
 
- $(document).on('click','#editP', function(){
-               var code_id = $(this).data('id');
-           $('.editProduct').find('form')[0].reset();
-           $('.editProduct').find('span-error-text').text();
-               $.post('{{ route("showeditdata") }}',
-               {}, 
-               function(data){
-                   $('.editProduct').modal('show'); 
- 
-                  },'json');
+    $(document).on('click','#editP', function(){
+            var code_id = $(this).data('id');
+            $('.editProduct').find('form')[0].reset();
+            $('.editProduct').find('span-error-text').text();
+            $.post('{{ route("showeditdata") }}',
+            {}, 
+            function(data){
+            $('.editProduct').modal('show'); 
+
+              },'json');
            });
         
     
